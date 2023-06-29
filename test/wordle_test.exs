@@ -11,14 +11,29 @@ defmodule Games.WordleTest do
   end
 
   test "feedback/2 contains at diff positions" do
-    assert Games.Wordle.feedback("abdce", "edcba") == [:yellow, :yellow, :yellow, :yellow, :yellow]
+    assert Games.Wordle.feedback("abdce", "edcba") == [
+             :yellow,
+             :yellow,
+             :yellow,
+             :yellow,
+             :yellow
+           ]
   end
 
-  test "feedback/2 duplicate characters" do
+  test "feedback/2 duplicate characters first" do
     assert Games.Wordle.feedback("aaabb", "xaaaa") == [:grey, :green, :green, :yellow, :grey]
   end
 
-  test "feedback/2 duplicate characters again" do
+  test "feedback/2 duplicate characters second" do
     assert Games.Wordle.feedback("XXXAA", "AAAAY") == [:yellow, :grey, :grey, :green, :grey]
+  end
+
+  @tag :skip
+  test "feedback/2 multiple yellows same char" do
+    assert Games.Wordle.feedback("xxcaa", "aacxx") == [:yellow, :yellow, :green, :yellow, :yellow]
+  end
+
+  test "feedback/2 one char could be multiple colors" do
+    assert Games.Wordle.feedback("aaaxx", "baaaa") == [:grey, :green, :green, :yellow, :grey]
   end
 end
