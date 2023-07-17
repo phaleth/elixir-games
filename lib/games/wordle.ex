@@ -105,6 +105,7 @@ defmodule Games.Wordle do
     cond do
       reply === [:green, :green, :green, :green, :green] ->
         IO.puts("Correct guess.")
+        Games.ScoreTracker.add_points(25)
 
       attempt_count === 0 ->
         IO.puts("Too many attempts. Game over.")

@@ -16,6 +16,7 @@ defmodule Games.GuessingGame do
 
     if guess_num === correct_num do
       IO.puts("Correct!")
+      Games.ScoreTracker.add_points(5)
     else
       if guess_num > correct_num, do: IO.puts("Too High!"), else: IO.puts("Too Low!")
       guess(correct_num)

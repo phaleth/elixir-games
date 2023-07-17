@@ -7,6 +7,7 @@ defmodule Games do
     3. Wordle
 
     enter "stop" to exit
+    enter "score" to view your current score
     """)
     |> to_string()
     |> String.trim_trailing()
@@ -30,6 +31,15 @@ defmodule Games do
 
       "stop" ->
         IO.puts("Goodbye.")
+
+      "score" ->
+        IO.puts("""
+        ==================================================
+        Your score is #{Games.ScoreTracker.current_score()}
+        ==================================================
+        """)
+
+        choose_game()
 
       _ ->
         choose_game()

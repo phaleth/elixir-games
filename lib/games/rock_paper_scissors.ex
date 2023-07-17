@@ -18,13 +18,29 @@ defmodule Games.RockPaperScissors do
 
     if player_choice in @valid_choices do
       case {player_choice, opponent_choice} do
-        {"rock", "scissors"} -> "You Win! #{player_choice} beats #{opponent_choice}"
-        {"paper", "rock"} -> "You Win! #{player_choice} beats #{opponent_choice}"
-        {"scissors", "paper"} -> "You Win! #{player_choice} beats #{opponent_choice}"
-        {"rock", "paper"} -> "You lose! #{opponent_choice} beats #{player_choice}"
-        {"paper", "scissors"} -> "You lose! #{opponent_choice} beats #{player_choice}"
-        {"scissors", "rock"} -> "You lose! #{opponent_choice} beats #{player_choice}"
-        {_, _} -> "It's a tie!"
+        {"rock", "scissors"} ->
+          "You Win! #{player_choice} beats #{opponent_choice}"
+          Games.ScoreTracker.add_points(10)
+
+        {"paper", "rock"} ->
+          "You Win! #{player_choice} beats #{opponent_choice}"
+          Games.ScoreTracker.add_points(10)
+
+        {"scissors", "paper"} ->
+          "You Win! #{player_choice} beats #{opponent_choice}"
+          Games.ScoreTracker.add_points(10)
+
+        {"rock", "paper"} ->
+          "You lose! #{opponent_choice} beats #{player_choice}"
+
+        {"paper", "scissors"} ->
+          "You lose! #{opponent_choice} beats #{player_choice}"
+
+        {"scissors", "rock"} ->
+          "You lose! #{opponent_choice} beats #{player_choice}"
+
+        {_, _} ->
+          "It's a tie!"
       end
     else
       IO.puts("Invalid player input.")
